@@ -1,0 +1,88 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:BasicAvaloniaEditor.ViewModels;assembly=BasicAvaloniaEditor"
+		xmlns:system ="clr-namespace:System;Assembly=mscorlib"
+		xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+        xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
+		xmlns:da="clr-namespace:DialogAction;assembly=DialogAction"
+        Icon="resm:BasicAvaloniaEditor.Assets.avalonia-logo.ico"
+        Title="BasicAvaloniaEditor"
+		x:Name="Window" Background="Silver">
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+	<!--<Window.Styles>
+		<Style Selector="TabControl">
+			<Setter Property="HeaderTemplate">
+				<DataTemplate>
+					<TextBlock Text="{Binding FileName}"/>
+				</DataTemplate>
+			</Setter>
+		</Style>
+	</Window.Styles>-->
+	<DockPanel>
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="File">
+				<MenuItem Command="{Binding New}" Header="New"/>
+				<MenuItem Command="{Binding SaveAll}" Header="Save All"/>
+			</MenuItem>
+			<MenuItem Header="Testing">
+				<MenuItem Header="TriggerConfirm" x:Name="_trigger">
+					<i:Interaction.Behaviors>
+						<ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #_trigger}">
+							<da:ConfirmationAction>
+								Trigger?
+								<da:ConfirmationAction.Yes>
+									<ia:ChangePropertyAction PropertyName="Background" Value="{StaticResource GreenBrush}" TargetObject="{Binding #Window}"/>
+								</da:ConfirmationAction.Yes>
+								<da:ConfirmationAction.No>
+									<ia:ChangePropertyAction PropertyName="Background" Value="{StaticResource RedBrush}" TargetObject="{Binding #Window}"/>
+								</da:ConfirmationAction.No>
+								<da:ConfirmationAction.Cancel>
+									<ia:ChangePropertyAction PropertyName="Background" Value="{StaticResource OrangeBrush}" TargetObject="{Binding #Window}"/>
+								</da:ConfirmationAction.Cancel>
+							</da:ConfirmationAction>
+							
+						</ia:EventTriggerBehavior> 
+					</i:Interaction.Behaviors>
+				</MenuItem>
+			</MenuItem>
+		</Menu>
+		<StackPanel DockPanel.Dock="Bottom">
+			<TextBox Text="{Binding CurrentFile.IsSaved}"/>
+		</StackPanel>
+		<TabControl Items="{Binding OpenFiles}" SelectedItem="{Binding CurrentFile}">
+			<TabControl.ItemTemplate>
+				<DataTemplate>
+					<DockPanel>
+						<TextBlock DockPanel.Dock="Left" Text="{Binding FileName}"/>
+						<Button x:Name="_CloseButton"
+							DockPanel.Dock="Right" CommandParameter="{Binding}" Content="X" IsEnabled="True">
+							<!--Command="{Binding $parent[TabControl].DataContext.Close}"-->
+							<!--<i:Interaction.Behaviors>
+								<ia:EventTriggerBehavior EventName="Click" SourceObject="{Binding #_CloseButton}">
+									
+								</ia:EventTriggerBehavior>
+							</i:Interaction.Behaviors>-->
+						</Button>
+						<i:Interaction.Behaviors>
+							<ia:DataTriggerBehavior Binding="{Binding IsSaved}" ComparisonCondition="Equal" Value="True">
+								<ia:ChangePropertyAction TargetObject="{Binding #_CloseButton}" PropertyName="Content" Value="X"/>
+							</ia:DataTriggerBehavior>
+							<ia:DataTriggerBehavior Binding="{Binding IsSaved}" ComparisonCondition="Equal" Value="False">
+								<ia:ChangePropertyAction TargetObject="{Binding #_CloseButton}" PropertyName="Content" Value="O"/>
+							</ia:DataTriggerBehavior>
+						</i:Interaction.Behaviors>
+					</DockPanel>
+				</DataTemplate>
+			</TabControl.ItemTemplate>
+			<TabControl.ContentTemplate>
+				<DataTemplate>
+					<TextBox AcceptsReturn="True" Text="{Binding Content}" />
+				</DataTemplate>
+			</TabControl.ContentTemplate>
+		</TabControl>
+		<!--<TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+	</DockPanel>
+</Window>

@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\*" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\ConfirmSave.xaml" />
+    <None Remove="Views\TextEditor.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.7.1-cibuild0001644-beta" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.7.1-cibuild0001644-beta" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.7.1-cibuild0001644-beta" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.7.1-build20190303-02" />
+    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.7.1-build20190303-02" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DialogAction\DialogAction.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\TextEditor.xaml.cs">
+      <DependentUpon>TextEditor.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\ConfirmSave.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TextEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,16 @@
+﻿<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BasicAvaloniaEditor">
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+    <Application.Styles>
+        <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
+        <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
+    </Application.Styles>
+	<Application.Resources>
+		<SolidColorBrush Color="Red" x:Key="RedBrush"/>
+		<SolidColorBrush Color="Green" x:Key="GreenBrush"/>
+		<SolidColorBrush Color="Orange" x:Key="OrangeBrush"/>
+	</Application.Resources>
+</Application>

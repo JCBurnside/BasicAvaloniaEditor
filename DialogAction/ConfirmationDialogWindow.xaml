@@ -1,0 +1,16 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		>
+	<Grid ColumnDefinitions="*,auto,auto,auto" RowDefinitions="auto,auto,auto">
+		<Grid.Styles>
+			<Style Selector="Button">
+				<Setter Property="Margin" Value="2"/>
+			</Style>
+		</Grid.Styles>
+		<Button Grid.Row="0" Grid.Column="3" Command="{Binding Close}" CommandParameter="ConfirmationTypes.Cancel" Name="Close">X</Button>
+		<TextBlock Grid.Row="1" Grid.ColumnSpan="4" Text="{Binding Message}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<Button Grid.Row="2" Grid.Column="1" Command="{Binding Close}" CommandParameter="ConfirmationTypes.Yes" Name="Yes">Yes</Button>
+		<Button Grid.Row="2" Grid.Column="2" Command="{Binding Close}" CommandParameter="ConfirmationTypes.No" Name="No">No</Button>
+		<Button Grid.Row="2" Grid.Column="3" Command="{Binding Close}" CommandParameter="ConfirmationTypes.Cancel" Name="Cancel">Cancel</Button>
+	</Grid>
+</Window>
